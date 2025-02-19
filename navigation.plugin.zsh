@@ -4,8 +4,7 @@
 
 #  Navigation + Zoxide
 alias cd="z"         # Zoxide  
-alias f="z -"      # Fast switch directories  
-alias j="zi"
+alias cdi="z -"      # Fast switch directories  
 alias ..="z .."
 alias .2="z ../.."
 alias .3="z ../../.."
