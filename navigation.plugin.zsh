@@ -13,7 +13,7 @@ alias .5="z ../../../../.."
 
 #  Command Enhancements
 alias mkdir="mkdir -pv"  
-alias cat="bat"  # Modern `cat`
+# alias cat="bat"  # Modern `cat`
 alias cp="cp -iv"  
 alias mv="mv -iv"  
 alias rm="rm -Iv"  
