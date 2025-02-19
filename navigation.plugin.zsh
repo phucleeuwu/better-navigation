@@ -16,10 +16,9 @@ alias mkdir="mkdir -pv"
 # alias cat="bat"  # Modern `cat`
 alias cp="cp -iv"  
 alias mv="mv -iv"  
-alias rm="rm -Iv"  
+alias rm="rm -I"  
 alias lg="lazygit"  
 alias lzd="lazydocker"  
-alias untar="tar -xvf"  
 alias cls="clear"  
 
 #  Search Tools (fd + ripgrep)
