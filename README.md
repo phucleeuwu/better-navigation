@@ -1,4 +1,4 @@
-# 📌 navigation-plus.zsh
+# 📌 aliases-plus-plus.zsh
 
 A powerful Zsh plugin that enhances directory navigation by providing quick shortcuts and improved movement commands.
 
