@@ -2,6 +2,9 @@
 #  Aliases - Minimal Yet Powerful
 # ────────────────────────────────────────────────────────────
 setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
 
 #  Navigation + Zoxide
 alias cd="z"         # Zoxide  
@@ -10,6 +13,26 @@ alias -g .2="cd ../.."
 alias -g .3="cd ../../.."
 alias -g .4="cd ../../../.."
 alias -g .5="cd ../../../../.."
+
+# Cd recent dirs (1, 2, 3, 4,... 9)
+alias 1='cd -1'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
+
+function d () {  #list recent dirs
+  if [[ -n $1 ]]; then
+    dirs "$@"
+  else
+    dirs -v | head -n 10
+  fi
+}
+compdef _dirs d
 
 #  Command Enhancements
 
