@@ -1,52 +1,131 @@
-# 📌 aliases-plus-plus.zsh
+# 📌 Zsh Power Setup
 
-A powerful Zsh plugin that enhances directory navigation by providing quick shortcuts and improved movement commands.
+A collection of **optimized Zsh aliases, functions, and settings** for enhanced navigation, directory management, and command efficiency.
 
 ## 🚀 Features
-- **Quick Directory Navigation**: Easily jump between directories using intuitive shortcuts.
-- **Enhanced `cd` Commands**: Navigate up multiple levels quickly.
-- **Integration with `zoxide`**: Leverage smarter directory jumping.
 
-## 📦 Installation
+- **Auto Navigation**: Smart directory switching without typing `cd`.
+- **Zoxide Integration**: Fast directory jumps.
+- **Recent Directory Access**: Quickly switch to recent directories.
+- **Enhanced Aliases**: Safer and more efficient commands.
+- **Smart `take` Function**: Handles directories, Git repos, and compressed files.
+- **Improved Search Tools**: Using `fd` and `ripgrep`.
 
-### Using Zinit (Recommended)
+---
+
+## 🔧 Shell Options
+
 ```sh
-zinit load phucleeuwu/navigation-plus.zsh
+setopt auto_cd             # Auto change dir without `cd`
+setopt auto_pushd          # Push prev dir to stack on `cd`
+setopt pushd_ignore_dups   # No duplicate dirs in stack
+setopt pushdminus          # Reverse pushd behavior
 ```
 
-### Using Oh My Zsh
-1. Clone the repository into your custom plugins directory:
-   ```sh
-   git clone https://github.com/phucleeuwu/navigation-plus.zsh ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/navigation-plus
-   ```
-2. Add `navigation-plus` to your `~/.zshrc` plugins list:
-   ```sh
-   plugins=(... navigation-plus)
-   ```
-3. Restart your shell:
+---
+
+## 📂 Navigation & Zoxide
+
+```sh
+alias cd="z"               # Use Zoxide for quick jumps
+alias cdi="cd -"           # Go to last dir
+
+# Shortcuts to move up levels
+alias -g .2="cd ../.."
+alias -g .3="cd ../../.."
+alias -g .4="cd ../../../.."
+alias -g .5="cd ../../../../.."
+```
+
+### ⏳ Recent Directory Access
+
+```sh
+alias 1='cd -1'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
+```
+
+**List Recent Directories:**
+```sh
+function d () {  
+  [[ -n $1 ]] && dirs "$@" || dirs -v | head -n 10
+}
+compdef _dirs d  
+```
+
+---
+
+## 📁 Directory Handling
+
+### 📌 `mkcd` - Create & Enter Directory
+```sh
+mkcd() { mkdir -p "$1" && cd "$1"; }
+```
+
+### 📌 `take` - Create, Clone, or Extract
+```sh
+take() {
+  [[ -z "$1" ]] && echo "Usage: take <dir|URL>" && return 1
+  case "$1" in
+    *github.com/* | *gitlab.com/* | *bitbucket.org/*)
+      repo_url="${1%.git}.git"
+      git clone "$repo_url" && cd "$(basename "$repo_url" .git)"
+      ;;
+    *.tar.gz|*.tgz) filename=$(basename "$1")
+      wget "$1" -O "$filename" && tar -xvzf "$filename" && cd "$(tar -tf "$filename" | head -1 | cut -d/ -f1)"
+      ;;
+    *.tar.bz2|*.tbz2) filename=$(basename "$1")
+      wget "$1" -O "$filename" && tar -xvjf "$filename" && cd "$(tar -tf "$filename" | head -1 | cut -d/ -f1)"
+      ;;
+    *.tar.xz|*.txz) filename=$(basename "$1")
+      wget "$1" -O "$filename" && tar -xvJf "$filename" && cd "$(tar -tf "$filename" | head -1 | cut -d/ -f1)"
+      ;;
+    *) mkcd "$1" ;;
+  esac
+}
+```
+
+---
+
+## ⚙️ Aliases - Improved Commands
+
+```sh
+alias md='mkdir -pv'         # Create dirs w/ output
+alias rd='rm -rf'            # Remove dir (force)
+alias mkdir="mkdir -pv"      
+alias cp="cp -v"             # Verbose copy
+alias mv="mv -iv"             # Interactive move
+alias rm="rm -I"             # Confirm on multi-file delete
+alias lg="lazygit"           
+alias lzd="lazydocker"       
+alias cls="clear"            
+```
+
+---
+
+## 🔍 Search Tools
+
+```sh
+alias fdf="fd --type=f --hidden"  # Find files
+alias fdd="fd --type=d --hidden"  # Find dirs
+alias rgt="rg --type"             # Search by type
+```
+
+---
+
+## 📜 Installation
+
+1. Copy and paste the above configurations into your **.zshrc** file.
+2. Restart your shell or run:
    ```sh
    source ~/.zshrc
    ```
 
-## ⌨️ Usage
-
-### Navigation Shortcuts
-- `..` → Move up one directory
-- `.2` → Move up two directories
-- `.3` → Move up three directories
-- `.4` → Move up four directories
-- `.5` → Move up five directories
-
-### `zoxide` Integration
-- `cd <dir>` → Uses `zoxide` for smarter navigation
-- `cdc` → Jump to the last directory
-
-## 🔧 Configuration
-Customize aliases by modifying `navigation-plus.zsh` or adding custom overrides in `.zshrc`.
-
-## 🤝 Contributing
-Pull requests are welcome! Feel free to submit issues and suggestions.
-
-## 📜 License
-This project is licensed under the **MIT License**.
+🚀 Now enjoy a **faster and smarter** Zsh experience!
 
