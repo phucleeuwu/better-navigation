@@ -1,20 +1,22 @@
 # ────────────────────────────────────────────────────────────
 #  Aliases - Minimal Yet Powerful
 # ────────────────────────────────────────────────────────────
+setopt auto_cd
 
 #  Navigation + Zoxide
 alias cd="z"         # Zoxide  
-alias cdi="z -"      # Fast switch directories  
-alias ..="z .."
-alias .2="z ../.."
-alias .3="z ../../.."
-alias .4="z ../../../.."
-alias .5="z ../../../../.."
+alias -- -="cd -"      # Fast switch directories  
+alias -g .2="cd ../.."
+alias -g .3="cd ../../.."
+alias -g .4="cd ../../../.."
+alias -g .5="cd ../../../../.."
 
 #  Command Enhancements
+alias md='mkdir -pv'
+alias rd='rmdir -I'
 alias mkdir="mkdir -pv"  
 # alias cat="bat"  # Modern `cat`
-alias cp="cp -iv"  
+alias cp="cp -v"  
 alias mv="mv -iv"  
 alias rm="rm -I"  
 alias lg="lazygit"  
