@@ -5,7 +5,7 @@ setopt auto_cd
 
 #  Navigation + Zoxide
 alias cd="z"         # Zoxide  
-alias -- -="cd -"      # Fast switch directories  
+alias cdi="cd -"      # Fast switch directories  
 alias -g .2="cd ../.."
 alias -g .3="cd ../../.."
 alias -g .4="cd ../../../.."
