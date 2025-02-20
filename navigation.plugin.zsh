@@ -24,8 +24,10 @@ take() {
   fi
 
   case "$1" in
-    *.git) # If argument ends in .git, clone it
-      git clone "$1" && cd "$(basename "$1" .git)" 
+    *github.com/* | *gitlab.com/* | *bitbucket.org/*)  # Detect Git hosting services
+      repo_url="$1"
+      [[ "$repo_url" != *.git ]] && repo_url+=".git"  # Append .git if missing
+      git clone "$repo_url" && cd "$(basename "$repo_url" .git)"
       ;;
     
     *.tar.gz|*.tgz) # If argument is a .tar.gz file
