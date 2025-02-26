@@ -19,6 +19,7 @@ alias cd="z"               # Use Zoxide for quick jumps
 alias cdi="cd -"           # Go to last dir
 
 # Shortcuts to move up levels
+alias 0="cd ~"
 alias -g .2="cd ../.."     
 alias -g .3="cd ../../.."  
 alias -g .4="cd ../../../.."  
