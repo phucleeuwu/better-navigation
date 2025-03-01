@@ -74,7 +74,7 @@ take() {
 # ────────────────────────────────────────────────────────────
 
 alias md='mkdir -pv'         # Create dirs w/ output
-alias rd='rm -rf'            # Remove dir (force)
+alias rd='rm -rf -i'            # Remove dir (force)
 alias mkdir="mkdir -pv"      
 alias cp="cp -v"             # Verbose copy
 alias mv="mv -iv"            # Interactive move
